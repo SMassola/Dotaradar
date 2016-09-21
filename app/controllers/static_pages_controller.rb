@@ -6,9 +6,16 @@ class StaticPagesController < ApplicationController
 
   def auth_callback
     auth = request.env['omniauth.auth']
-    @user = { :nickname => auth.info['nickname'],
-                                          :image => auth.info['image'],
-                                          :uid => auth.uid }
+    @user = {
+      :nickname => auth.info['nickname'],
+      :image => auth.info['image'],
+      :uid => auth.uid
+    }
     render :root
+  end
+
+  def logout
+    @user = nil
+    redirect_to root_url
   end
 end

@@ -1,2 +1,3 @@
-<script>var user = <%= @user %>;</script>
+<%= content_tag "div", id: 'user', data: { source: @user } do %>
+<% end %>
 <div id="root"></div>
