@@ -1,7 +1,7 @@
 import React from 'react';
 import FriendActions from '../../actions/friend_actions'
 import FriendStore from '../../stores/friend_store'
-
+import FriendIndexItem from './friend_index_item'
 class FriendsIndex extends React.Component {
 
   constructor(props) {
@@ -28,11 +28,12 @@ class FriendsIndex extends React.Component {
   render() {
     return (
       <div className="friends-index-container">
+        <div className="friends-index-title">Friends</div>
         <div className="friends-index">
           {this.state.friends.map((friend) => {
             return(
-              // <FriendIndexItem friend={friend} />
-            )
+              <FriendIndexItem friend={friend} key={friend["steamid"]}/>
+            );
           })}
         </div>
 

@@ -1,5 +1,12 @@
 .friends-index-container {
+  background: #222;
   height: 500px;
   width: 300px;
-  border: 1px solid black;
+  border: 8px solid #111;
+  overflow-y: scroll;
+}
+
+.friends-index-title {
+  color: white;
+  margin: 10px;
 }

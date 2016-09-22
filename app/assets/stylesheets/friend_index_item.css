@@ -1,0 +1,20 @@
+.friend-index-item-container {
+}
+
+.friend-index-item-container:nth-child(2n+1) {
+  background: #333;
+}
+
+.friend-index-item {
+  padding: 5px;
+  display: flex;
+  color: white;
+  align-items: center;
+}
+
+.index-item-avatar {
+  margin: 0 10px;
+  height: 40px;
+  width: auto;
+  border: 1px solid white;
+}
