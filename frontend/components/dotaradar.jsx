@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './header/header';
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
+import Main from './main/main';
 
 
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="app">
         <Header />
         {this.props.children}
       </div>
@@ -17,6 +18,7 @@ class App extends React.Component {
 
 const routes = (
   <Route path="/" component={App}>
+    <IndexRoute component={Main} />
     <Route path="/auth/steam"></Route>
   </Route>
 );
