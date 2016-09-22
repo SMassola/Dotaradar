@@ -3,6 +3,11 @@
   height: 500px;
   width: 300px;
   border: 8px solid #111;
+  overflow: hidden;
+}
+
+.friends-index {
+  height: calc(100% - 38px);
   overflow-y: scroll;
 }
 

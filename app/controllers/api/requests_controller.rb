@@ -1,5 +1,5 @@
 class Api::RequestsController < ApplicationController
-  
+
   def friends
     @friends = []
     url = URI.parse("https://api.steampowered.com/ISTEAMUser/GetFriendList/v0001/?key=#{ENV['STEAM_WEB_API_KEY']}&steamid=#{params[:userId]}&relationship=friend")
@@ -17,6 +17,15 @@ class Api::RequestsController < ApplicationController
     friends = JSON.load(res) || []
     @friends = friends
     render :friends
+  end
+
+  def matches
+    @matches = []
+    url = URI.parse("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{ENV['STEAM_WEB_API_KEY']}&account_id=#{params[:userId]}")
+    res = Net::HTTP::get(url)
+    matches = JSON.load(res) || []
+    @matches = matches['result']['matches']
+    render :matches
   end
 
   private

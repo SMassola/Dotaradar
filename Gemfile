@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-
 # Manage environment variables
 gem 'figaro'
 # Use Steam OpenID Omniauth gem for authenticating Steam users

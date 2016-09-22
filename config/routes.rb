@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :requests, only: [] do
       collection do
         get 'friends', action: :friends
+        get 'matches', action: :matches
       end
     end
   end

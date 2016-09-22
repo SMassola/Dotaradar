@@ -15,8 +15,8 @@ class Main extends React.Component {
     let userId = user ? user["uid"] : null
     return (
       <div className="main-container">
-        <RadarContainer />
-        <FriendsIndex userId={userId}/>
+        <RadarContainer userId={userId} />
+        <FriendsIndex userId={userId} user={user} />
       </div>
     )
   }

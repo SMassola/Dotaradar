@@ -2,6 +2,7 @@ import React from 'react';
 import FriendActions from '../../actions/friend_actions'
 import FriendStore from '../../stores/friend_store'
 import FriendIndexItem from './friend_index_item'
+
 class FriendsIndex extends React.Component {
 
   constructor(props) {
