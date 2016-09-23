@@ -9,7 +9,7 @@ const options = {
   w: width,
   h: height,
   margin,
-  maxValue: 0.5,
+  maxValue: 0,
   levels: 5,
   roundStrokes: true,
   color,

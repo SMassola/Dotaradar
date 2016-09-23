@@ -25,6 +25,34 @@ class Api::RequestsController < ApplicationController
     res = Net::HTTP::get(url)
     matches = JSON.load(res) || []
     @matches = matches['result']['matches']
+
+    # start_match = @matches[-1]["match_id"] - 1
+
+    # url = URI.parse("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{ENV['STEAM_WEB_API_KEY']}&account_id=#{params[:userId]}&start_at_match_id=#{start_match}")
+    # res = Net::HTTP::get(url)
+    # matches = JSON.load(res) || []
+    # @matches.concat(matches['result']['matches'])
+
+    url = URI.parse("http://api.steampowered.com/IEconDOTA2_570/GetHeroes/v1/?key=#{ENV['STEAM_WEB_API_KEY']}&itemizedonly=true")
+    res = Net::HTTP::get(url)
+    heroes = JSON.load(res) || []
+    @heroes = heroes['result']['heroes']
+
+
+    @matches.each do |match|
+      match["players"].each do |player|
+        account_id_64 = 76561197960265728 + player["account_id"]
+        if account_id_64 == params[:userId].to_i
+          match["user"] = player
+          @heroes.each do |hero|
+            if hero["id"] == match["user"]["hero_id"]
+              match["user"]["hero_name"] = hero["name"].gsub(/_/, ' ').gsub("npc dota hero ", "").split.map(&:capitalize).join(" ")
+            end
+          end
+        end
+      end
+    end
+
     render :matches
   end
 
