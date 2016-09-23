@@ -250,7 +250,8 @@ module.exports = {
 		//Set up the small tooltip for when you hover over a circle
 		var tooltip = g.append("text")
 			.attr("class", "tooltip")
-			.style("opacity", 0);
+			.style("opacity", 0)
+      .attr("fill", "white");
 
 		/////////////////////////////////////////////////////////
 		/////////////////// Helper Function /////////////////////

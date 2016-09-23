@@ -20,12 +20,12 @@ class Api::RequestsController < ApplicationController
   end
 
   def matches
+    @user_id = params[:userId]
     @matches = []
     url = URI.parse("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{ENV['STEAM_WEB_API_KEY']}&account_id=#{params[:userId]}")
     res = Net::HTTP::get(url)
     matches = JSON.load(res) || []
     @matches = matches['result']['matches']
-
     # start_match = @matches[-1]["match_id"] - 1
 
     # url = URI.parse("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{ENV['STEAM_WEB_API_KEY']}&account_id=#{params[:userId]}&start_at_match_id=#{start_match}")

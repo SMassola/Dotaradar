@@ -4,13 +4,26 @@
   background: #222;
   color: white;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.header-title {
+  display: flex;
+  font-size: 30px;
+  display: flex;
+}
+
+.red {
+  color: red;
 }
 
 .user-container {
   display: flex;
   align-items: center;
+  position: absolute;
+  right: 0;
 }
 
 .username {

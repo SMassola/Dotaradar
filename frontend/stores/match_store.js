@@ -5,6 +5,9 @@ import MatchActions from '../actions/match_actions';
 
 const MatchStore = new Store(AppDispatcher);
 
+let _matchSets = {};
+let _matchHeroes = {};
+let _matchData = {};
 let _matches = {};
 let _heroes = {};
 let _data = {};
@@ -12,6 +15,10 @@ let _data = {};
 MatchStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
     case MatchConstants.MATCHES_FETCHED:
+      addMatchSets(payload.matches);
+      addMatchSetsHeroes(payload.matches);
+      addMatchSetsData();
+
       resetAllMatches(payload.matches);
       resetAllHeroes(payload.matches);
       calculatePercentages();
@@ -19,6 +26,26 @@ MatchStore.__onDispatch = function(payload) {
       break;
   }
 };
+
+function addMatchSets(matches) {
+  _matchSets[matches["userId"]] = matches["matches"]
+}
+
+function addMatchSetsHeroes(matches) {
+  _matchHeroes[matches["userId"]] = []
+  matches["matches"].forEach((match) => {
+    _matchHeroes[matches["userId"]].push(match["user"]["hero_name"]);
+  })
+}
+
+function addMatchSetsData() {
+  Object.keys(_matchHeroes).forEach((user) => {
+    _matchData[user] = {};
+    _matchHeroes[user].forEach((hero) => {
+      _matchData[user][hero] = _matchData[user][hero] ? _matchData[user][hero] + 1 : 1
+    })
+  })
+}
 
 function calculatePercentages() {
   _data = {};
@@ -34,6 +61,7 @@ function resetAllMatches(matches) {
   steamMatches.forEach((match) => {
     _matches[match["match_id"]] = match;
   });
+  // console.log(_matches);
 }
 
 function resetAllHeroes(matches) {
@@ -59,6 +87,10 @@ MatchStore.allHeroes = function() {
 MatchStore.allData = function() {
   return _data
 };
+
+MatchStore.allMatchData = function() {
+  return _matchData
+}
 
 
 module.exports = MatchStore;

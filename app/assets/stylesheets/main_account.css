@@ -1,0 +1,27 @@
+.main-user {
+  background: #222;
+  height: 100px;
+  width: 300px;
+  border: 8px solid #111;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.main-user-title {
+  color: white;
+  margin: 10px;
+}
+
+.main-user-info {
+  padding: 5px;
+  display: flex;
+  color: white;
+  align-items: center;
+}
+
+.index-item-avatar {
+  margin: 0 10px;
+  height: 40px;
+  width: auto;
+  border: 1px solid white;
+}
