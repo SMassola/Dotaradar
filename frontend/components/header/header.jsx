@@ -11,7 +11,10 @@ class Header extends React.Component {
     let user = this.state.currentUser
     return (
       <div className="header-container">
-        <div className="header-title">Dota<div className="red">Radar</div></div>
+        <div className="header-title">
+          Dota
+          <div className="red-text">Radar</div>  
+        </div>
         { user ? <div className="user-container">
           <div className="username">Welcome, {user["nickname"]}!</div>
           <img src={user["image"]} className="avatar"></img>

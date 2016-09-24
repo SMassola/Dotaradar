@@ -3,7 +3,7 @@ const margin = { top: 100, right: 100, bottom: 100, left: 100 };
 const width = 450;
 const height = 450;
 
-const color = d3.scale.ordinal().range(['#EDC951', '#CC333F', '#00A0B0']);
+const color = d3.scale.ordinal().range(['#EDC951', '#CC333F', '#00A0B0', 'limeGreen', 'pink', 'orange', 'purple', '#2196f3']);
 
 const options = {
   w: width,
@@ -11,7 +11,7 @@ const options = {
   margin,
   maxValue: 0,
   levels: 5,
-  roundStrokes: true,
+  roundStrokes: false,
   color,
 };
 

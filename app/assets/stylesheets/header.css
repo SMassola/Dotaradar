@@ -15,7 +15,7 @@
   display: flex;
 }
 
-.red {
+.red-text {
   color: red;
 }
 
@@ -38,8 +38,8 @@
 }
 
 .auth-button {
-  margin: 5px;
-  padding: 10px;
+  margin: 10px;
+  padding: 5px;
   text-decoration: none;
   color: white;
   border: 1px solid white;

@@ -14,7 +14,6 @@ class FriendIndexItem extends React.Component {
     if (this.state.show) {
       MatchActions.removeMatches(this.props.friend["steamid"])
     } else {
-      // console.log(this.state.data);
       if (this.state.data) {
         MatchActions.reuseMatches(this.state.data)
       } else {
@@ -27,7 +26,7 @@ class FriendIndexItem extends React.Component {
   render() {
     return (
       <div className="friend-index-item-container">
-        <div className="friend-index-item">
+        <div className="friend-index-item" id={this.props.friend["steamid"]}>
           <input type="checkbox" onChange={this._handleToggle}></input>
           <img src={this.props.friend["avatar"]} className="index-item-avatar"></img>
           <div className="index-item-username">{this.props.friend["personaname"]}</div>

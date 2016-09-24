@@ -7,6 +7,7 @@ class RadarContainer extends React.Component {
 
   constructor(props) {
     super(props);
+    this.colors = ['yellow', 'red', 'teal', 'lime', 'pink', 'orange', 'purple', 'blue']
     this.state = {matches: [], heroes: [], data: {}, matchData: {}, heroPool: []}
     this._handleMatches = this._handleMatches.bind(this)
   }
@@ -33,10 +34,16 @@ class RadarContainer extends React.Component {
     this.setState({matchData: MatchStore.allMatchData()})
     this.state.heroPool = [];
 
+    this._handleColors(Object.keys(this.state.matchData));
+
     let data = this.createDataSet();
     let matchData = this.createMatchDataSet();
-    
-    RadarChart.drawChart('.chart', matchData)
+
+    if (matchData.length === 0) {
+      RadarChart.drawChart('.chart', [[]]);
+    } else {
+      RadarChart.drawChart('.chart', matchData);
+    }
   }
 
   mostplayed(userHeroes) {
@@ -44,7 +51,7 @@ class RadarContainer extends React.Component {
       return userHeroes[obj2] - userHeroes[obj1]
     })
 
-    let mostPlayed = heroes.slice(0, 10)
+    let mostPlayed = heroes.slice(0, 3)
     mostPlayed.forEach((hero) => {
       if (this.state.heroPool.indexOf(hero) === -1) {
         this.state.heroPool.push(hero)
@@ -96,6 +103,18 @@ class RadarContainer extends React.Component {
     let data = []
     data.push(mostPlayed)
     return data
+  }
+
+  _handleColors(playerIds) {
+    let friendItems = document.getElementsByClassName("friend-index-item");
+
+    [].forEach.call(friendItems, function(el) {el.className = "friend-index-item"});
+
+    document.getElementsByClassName("main-user-info")[0].className = "main-user-info";
+
+    playerIds.forEach((playerId, i) => {
+      document.getElementById(playerId).className += ` ${this.colors[i]}`
+    })
   }
 
   render() {
