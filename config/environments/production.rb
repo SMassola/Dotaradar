@@ -1,4 +1,6 @@
 Rails.application.configure do
+
+  config.secret_key_base = ENV["STEAM_WEB_API_KEY"]
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
