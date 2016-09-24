@@ -12,5 +12,19 @@ module.exports = {
       actionType: MatchConstants.MATCHES_FETCHED,
       matches: matches
     })
+  },
+
+  removeMatches(userId) {
+    AppDispatcher.dispatch({
+      actionType: MatchConstants.MATCHES_REMOVAL,
+      userId: userId
+    })
+  },
+
+  reuseMatches(matches) {
+    AppDispatcher.dispatch({
+      actionType: MatchConstants.MATCHES_REUSED,
+      matches: matches
+    })
   }
 }

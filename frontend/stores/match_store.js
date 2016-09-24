@@ -24,8 +24,22 @@ MatchStore.__onDispatch = function(payload) {
       calculatePercentages();
       MatchStore.__emitChange();
       break;
+    case MatchConstants.MATCHES_REMOVAL:
+      deleteMatch(payload.userId);
+      MatchStore.__emitChange();
+      break;
+    case MatchConstants.MATCHES_REUSED:
+      readdMatches(payload.matches);
+      MatchStore.__emitChange();
+      break;
   }
 };
+
+function deleteMatch(userId) {
+  delete _matchSets[userId];
+  delete _matchHeroes[userId];
+  delete _matchData[userId];
+}
 
 function addMatchSets(matches) {
   _matchSets[matches["userId"]] = matches["matches"]
@@ -61,7 +75,6 @@ function resetAllMatches(matches) {
   steamMatches.forEach((match) => {
     _matches[match["match_id"]] = match;
   });
-  // console.log(_matches);
 }
 
 function resetAllHeroes(matches) {
@@ -91,6 +104,5 @@ MatchStore.allData = function() {
 MatchStore.allMatchData = function() {
   return _matchData
 }
-
 
 module.exports = MatchStore;

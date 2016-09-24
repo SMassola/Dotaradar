@@ -31,9 +31,11 @@ class RadarContainer extends React.Component {
     this.setState({heroes: MatchStore.allHeroes()})
     this.setState({data: MatchStore.allData()})
     this.setState({matchData: MatchStore.allMatchData()})
+    this.state.heroPool = [];
 
     let data = this.createDataSet();
     let matchData = this.createMatchDataSet();
+    
     RadarChart.drawChart('.chart', matchData)
   }
 
@@ -54,13 +56,18 @@ class RadarContainer extends React.Component {
     this.setState({heroPool: []})
     let matchData = this.state.matchData
     let data = []
-    Object.keys(matchData).forEach((user) => {
 
+    //grab the top 10 most played heroes for each user.
+    Object.keys(matchData).forEach((user) => {
       this.mostplayed(matchData[user]);
     })
+
+    //sort the heroes in alpha order
     this.state.heroPool.sort(function(obj1, obj2) {
       return(obj1.localeCompare(obj2))
     })
+
+    //create formatted data
     Object.keys(matchData).forEach((user) => {
       let subData = [];
       this.state.heroPool.forEach((hero) => {

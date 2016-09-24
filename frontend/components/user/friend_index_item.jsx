@@ -11,16 +11,17 @@ class FriendIndexItem extends React.Component {
   }
 
   _handleToggle() {
-
-    if (!this.state.data) {
-      MatchActions.fetchMatches(this.props.friend["steamid"]);
-    }
-
-    this.setState({show: !this.state.show});
-
     if (this.state.show) {
-      
+      MatchActions.removeMatches(this.props.friend["steamid"])
+    } else {
+      // console.log(this.state.data);
+      if (this.state.data) {
+        MatchActions.reuseMatches(this.state.data)
+      } else {
+        MatchActions.fetchMatches(this.props.friend["steamid"]);
+      }
     }
+    this.setState({show: !this.state.show});
   }
 
   render() {
