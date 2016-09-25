@@ -13,14 +13,19 @@ class Header extends React.Component {
       <div className="header-container">
         <div className="header-title">
           Dota
-          <div className="red-text">Radar</div>  
+          <div className="red-text">Radar</div>
         </div>
         { user ? <div className="user-container">
           <div className="username">Welcome, {user["nickname"]}!</div>
           <img src={user["image"]} className="avatar"></img>
-          <a className="auth-button" href='/logout'>Log Out</a>
+          <a className="log-out" href='/logout'>
+            <img className="steam-img"src="https://res.cloudinary.com/deeucxgdi/image/upload/v1474822067/steam_cvvjxk.png"></img>
+            <div className="log-out-text">Log Out</div>
+          </a>
         </div> : <div className="user-container">
-          <a className="auth-button" href='/auth/steam'>Log In</a>
+          <a className="log-in" href='/auth/steam'>
+            <img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_large_noborder.png"></img>
+          </a>
         </div> }
       </div>
     )

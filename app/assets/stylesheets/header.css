@@ -37,11 +37,33 @@
   border: 1px solid white;
 }
 
-.auth-button {
-  margin: 10px;
+.steam-img {
+  height: 20px;
+  margin: 0 5px;
+}
+
+.log-out-text {
+  margin: 0 5px;
+}
+
+.log-out {
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
   padding: 5px;
   text-decoration: none;
   color: white;
-  border: 1px solid white;
-  background: transparent;
+  background: #424242;
+  margin: 0 20px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.log-in {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.log-in:hover, .log-out:hover {
+  cursor: pointer;
 }
