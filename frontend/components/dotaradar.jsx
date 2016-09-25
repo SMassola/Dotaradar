@@ -4,6 +4,10 @@ import Header from './header/header';
 import { Router, Route, IndexRoute } from 'react-router';
 import Main from './main/main';
 
+import { Router, useRouterHistory } from 'react-router'
+import { createHashHistory } from 'history'
+
+const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
 class App extends React.Component {
   render() {
@@ -25,5 +29,5 @@ const routes = (
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
-  ReactDOM.render(<Router routes={routes} />, root);
+  ReactDOM.render(<Router routes={routes} history={appHistory} />, root);
 });
