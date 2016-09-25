@@ -57,7 +57,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store, "localhost"
+  config.cache_store = :mem_cache_store, "localhost"
   # config.cache_store = :memory_store, { size: 64.megabytes }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
