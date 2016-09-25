@@ -1,13 +1,13 @@
 .friends-index-container {
   background: #222;
-  height: 500px;
+  height: 510px;
   width: 300px;
   border: 8px solid #111;
   overflow: hidden;
 }
 
 .friends-index {
-  height: calc(100% - 38px);
+  height: calc(100% - 42px);
   overflow-y: scroll;
 }
 

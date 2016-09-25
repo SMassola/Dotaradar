@@ -34,7 +34,7 @@ class MainUser extends React.Component {
           <div className="main-user-info" id={userId} onClick={this._handleToggle}>
             <img src={user["image"]} className="index-item-avatar"></img>
             <div className="index-item-username">{user["nickname"]}</div>
-          </div> : <div className="main-user-info"></div>}
+          </div> : ""}
       </div>
     )
   }
