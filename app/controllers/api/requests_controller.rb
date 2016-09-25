@@ -21,11 +21,16 @@ class Api::RequestsController < ApplicationController
 
   def matches
     @user_id = params[:userId]
-    @matches = []
+    @matches = Rails.cache.fetch(@user_id) { match_request }
+
+    render :matches
+  end
+
+  def match_request
     url = URI.parse("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{ENV['STEAM_WEB_API_KEY']}&account_id=#{params[:userId]}")
     res = Net::HTTP::get(url)
     matches = JSON.load(res) || []
-    @matches = matches['result']['matches']
+    @user_matches = matches['result']['matches']
     # start_match = @matches[-1]["match_id"] - 1
 
     # url = URI.parse("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=#{ENV['STEAM_WEB_API_KEY']}&account_id=#{params[:userId]}&start_at_match_id=#{start_match}")
@@ -36,15 +41,15 @@ class Api::RequestsController < ApplicationController
     url = URI.parse("http://api.steampowered.com/IEconDOTA2_570/GetHeroes/v1/?key=#{ENV['STEAM_WEB_API_KEY']}&itemizedonly=true")
     res = Net::HTTP::get(url)
     heroes = JSON.load(res) || []
-    @heroes = heroes['result']['heroes']
+    @user_heroes = heroes['result']['heroes']
 
 
-    @matches.each do |match|
+    @user_matches.each do |match|
       match["players"].each do |player|
         account_id_64 = 76561197960265728 + player["account_id"]
         if account_id_64 == params[:userId].to_i
           match["user"] = player
-          @heroes.each do |hero|
+          @user_heroes.each do |hero|
             if hero["id"] == match["user"]["hero_id"]
               match["user"]["hero_name"] = hero["name"].gsub(/_/, ' ').gsub("npc dota hero ", "").split.map(&:capitalize).join(" ")
             end
@@ -53,7 +58,7 @@ class Api::RequestsController < ApplicationController
       end
     end
 
-    render :matches
+    return @user_matches
   end
 
   private
