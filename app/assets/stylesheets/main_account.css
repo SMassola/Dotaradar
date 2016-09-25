@@ -19,6 +19,11 @@
   align-items: center;
 }
 
+.main-user-info:hover {
+  cursor: pointer;
+  background: #9e9e9e;
+}
+
 .index-item-avatar {
   margin: 0 10px;
   height: 40px;

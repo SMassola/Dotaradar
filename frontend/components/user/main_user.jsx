@@ -31,8 +31,7 @@ class MainUser extends React.Component {
       <div className="main-user">
         <div className="main-user-title">You</div>
         {user ?
-          <div className="main-user-info" id={userId}>
-            <input type="checkbox" onChange={this._handleToggle} checked={this.state.show}></input>
+          <div className="main-user-info" id={userId} onClick={this._handleToggle}>
             <img src={user["image"]} className="index-item-avatar"></img>
             <div className="index-item-username">{user["nickname"]}</div>
           </div> : <div className="main-user-info"></div>}

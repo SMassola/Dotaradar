@@ -1,31 +1,31 @@
-.yellow {
+.yellow, .yellow:hover {
   background: #EDC951;
 }
 
-.red {
+.red, .red:hover {
   background: #CC333F;
 }
 
-.teal {
+.teal, .teal:hover {
   background: #00A0B0;
 }
 
-.lime {
+.lime, .lime:hover {
   background: limegreen;
 }
 
-.pink {
+.pink, .pink:hover {
   background: pink;
 }
 
-.orange {
+.orange, .orange:hover {
   background: orange;
 }
 
-.purple {
+.purple, .purple:hover {
   background: purple;
 }
 
-.blue {
+.blue, .blue:hover {
   background: #2196f3;
 }

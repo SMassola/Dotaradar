@@ -26,8 +26,7 @@ class FriendIndexItem extends React.Component {
   render() {
     return (
       <div className="friend-index-item-container">
-        <div className="friend-index-item" id={this.props.friend["steamid"]}>
-          <input type="checkbox" onChange={this._handleToggle}></input>
+        <div className="friend-index-item" id={this.props.friend["steamid"]} onClick={this._handleToggle}>
           <img src={this.props.friend["avatar"]} className="index-item-avatar"></img>
           <div className="index-item-username">{this.props.friend["personaname"]}</div>
         </div>
