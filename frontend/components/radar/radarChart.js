@@ -12,7 +12,7 @@ const options = {
   maxValue: 0,
   levels: 5,
   roundStrokes: false,
-  color,
+  color: color,
 };
 
 module.exports = {
@@ -284,8 +284,5 @@ module.exports = {
 				}
 		  });
 		}
-	},
-	removeChart(id) {
-		d3.select(id).select("svg").remove();
-	},
+	}
 };
