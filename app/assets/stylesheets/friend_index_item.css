@@ -6,7 +6,7 @@
 }
 
 .friend-index-item {
-  padding: 5px;
+  padding: 5px 0;
   display: flex;
   color: white;
   align-items: center;
@@ -19,7 +19,17 @@
 
 .index-item-avatar {
   margin: 0 10px;
-  height: 40px;
+  height: 25px;
   width: auto;
   border: 1px solid white;
+}
+
+@media (min-width: 600px) {
+  .index-item-avatar {
+    height: 40px;
+  }
+
+  .friend-index-item {
+    padding: 5px;
+  }
 }

@@ -1,7 +1,25 @@
 .main-container {
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 80px);
   background: #292d31;
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
+}
+
+.accounts-container {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .main-container {
+    width: auto;
+    min-height: calc(100vh - 50px);
+    flex-direction: row;
+  }
+
+  .accounts-container {
+    width: auto;
+  }
 }

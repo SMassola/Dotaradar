@@ -1,7 +1,27 @@
 const chart = document.getElementsByClassName('chart')[0];
-const margin = { top: 100, right: 100, bottom: 100, left: 100 };
-const width = 450;
-const height = 450;
+const viewportWidth = document.documentElement.clientWidth;
+const DIMENSIONS = {
+  320: 220,
+  342: 242,
+  345: 245,
+  346: 246,
+  356: 456,
+  360: 260,
+  375: 275,
+  384: 284,
+  390: 290,
+  400: 300,
+  412: 312,
+  414: 314,
+  425: 325,
+  432: 332,
+  480: 380,
+  504: 404
+};
+
+const width = DIMENSIONS[viewportWidth] ? DIMENSIONS[viewportWidth] : 450;
+const height = DIMENSIONS[viewportWidth] ? DIMENSIONS[viewportWidth] : 450;
+const margin = viewportWidth <= 600 ? { top: 50, right: 50, bottom: 50, left: 50 } : { top: 100, right: 100, bottom: 100, left: 100 };
 
 const color = d3.scale.ordinal().range(['#EDC951', '#CC333F', '#00A0B0', 'limeGreen', 'pink', 'orange', 'purple', '#2196f3']);
 

@@ -1,19 +1,17 @@
 .main-user {
   background: #222;
-  height: 94px;
-  width: 300px;
-  border: 8px solid #111;
-  overflow: hidden;
+  height: 67px;
+  width: 100%;
   margin: 10px 0;
 }
 
 .main-user-title {
   color: white;
-  margin: 10px;
+  padding: 5px 10px;
 }
 
 .main-user-info {
-  padding: 5px;
+  padding: 5px 0;
   display: flex;
   color: white;
   align-items: center;
@@ -26,7 +24,29 @@
 
 .index-item-avatar {
   margin: 0 10px;
-  height: 40px;
+  height: 25px;
   width: auto;
   border: 1px solid white;
+}
+
+@media (min-width: 600px) {
+  .main-user {
+    background: #222;
+    height: 108px;
+    width: 300px;
+    border: 8px solid #111;
+  }
+
+  .main-user-title {
+    padding: 0;
+    margin: 10px;
+  }
+
+  .main-user-info {
+    padding: 5px;
+  }
+
+  .index-item-avatar {
+    height: 40px;
+  }
 }
