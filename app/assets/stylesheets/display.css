@@ -1,0 +1,32 @@
+.display-container {
+  color: white;
+  background: #222;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.display-title {
+  background: #222;
+  padding: 0 15px;
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.display-title-decoration {
+  position: relative;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.display-title-decoration:before {
+  content: "";
+  display: block;
+  position: absolute;
+  text-align: center;
+  background: #ddd;
+  top: 50%;
+  height: 1px;
+  width: 100%;
+}

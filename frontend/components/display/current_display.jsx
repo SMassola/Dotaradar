@@ -8,10 +8,9 @@ class CurrentDisplay extends React.Component {
     this._handleDescription = this._handleDescription.bind(this);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //
-  //   this.setState({display: nextProps})
-  // }
+  componentWillReceiveProps(nextProps) {
+    this.setState({display: nextProps});
+  }
 
   _handleDescription() {
     switch (this.state.display) {
@@ -20,7 +19,7 @@ class CurrentDisplay extends React.Component {
           <div className="display-description">
             Displaying hero pick rates from each players last 100 matches.
             The hero pool displayed is derived from each players 3 most picked
-            heroes in their last 100 matches.
+            heroes from those matches.
           </div>
         )
         break;
@@ -38,7 +37,9 @@ class CurrentDisplay extends React.Component {
     let userId = this.props.userId
     return (
       <div className="display-container">
-        <div className="display-title">Currently Displayed:</div>
+        <div className="display-title-decoration">
+          <span className="display-title">Currently Displayed</span>
+        </div>
         {this._handleDescription()}
       </div>
     )
