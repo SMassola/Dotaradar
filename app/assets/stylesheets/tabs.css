@@ -1,0 +1,19 @@
+.tabs-container {
+  display: flex;
+  color: white;
+}
+
+.tab {
+  background: #333;
+  padding: 5px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden
+}
+
+.tab:hover {
+  cursor: pointer;
+}
+
+.selected-tab {
+  background: #222;
+}

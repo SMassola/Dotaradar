@@ -4,12 +4,12 @@ class CurrentDisplay extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {display: "hero"}
+    this.state = {display: this.props.tab}
     this._handleDescription = this._handleDescription.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({display: nextProps});
+    this.setState({display: nextProps.tab});
   }
 
   _handleDescription() {
