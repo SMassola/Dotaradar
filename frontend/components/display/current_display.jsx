@@ -18,7 +18,7 @@ class CurrentDisplay extends React.Component {
         return (
           <div className="display-description">
             Displaying hero pick rates from each players last 100 matches.
-            The hero pool displayed is derived from each players 3 most picked
+            The hero pool displayed is derived from each player's 3 most picked
             heroes from those matches.
           </div>
         )
@@ -27,8 +27,8 @@ class CurrentDisplay extends React.Component {
         return (
           <div className="display-description">
             Displaying teammate hero pick rates from each players last 100 matches.
-            The hero pool displayed is derived from each players teammates 3 most picked
-            heroes from those matches.
+            The hero pool displayed is derived from each player's 4 most frequent
+            allied heroes from those matches.
           </div>
         )
         break;
@@ -36,8 +36,8 @@ class CurrentDisplay extends React.Component {
         return (
           <div className="display-description">
             Displaying enemy hero pick rates from each players last 100 matches.
-            The hero pool displayed is derived from each players enemies 3 most picked
-            heroes from those matches.
+            The hero pool displayed is derived from each player's 5 most frequent
+            enemy heroes from those matches.
           </div>
         )
         break;

@@ -6,23 +6,15 @@ class MainUser extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {show: true, tab: this.props.tab}
+    this.state = {show: true}
     this._handleToggle = this._handleToggle.bind(this)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({tab: nextProps.tab});
   }
 
   _handleToggle() {
     if (this.state.show) {
-      MatchActions.removeMatches(this.props.userId)
+      MatchActions.removeMatches(this.props.userId);
     } else {
-      switch (this.state.tab) {
-        case "heroes":
-          MatchActions.fetchMatches(this.props.userId);
-          break;
-      }
+      MatchActions.fetchMatches(this.props.userId);
     }
     this.setState({show: !this.state.show});
   }

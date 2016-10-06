@@ -7,15 +7,19 @@ const MatchStore = new Store(AppDispatcher);
 
 let _matchSets = {};
 let _matchHeroes = {};
+let _matchAlliedHeroes = {};
+let _matchEnemyHeroes = {};
 let _matchData = {};
 
 MatchStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
     case MatchConstants.MATCHES_FETCHED:
-    console.log(payload.matches);
       addMatchSets(payload.matches);
       addHeroes(payload.matches);
-      addMatchSetsData();
+      addAlliedHeroes(payload.matches);
+      addEnemyHeroes(payload.matches);
+
+      addHeroData();
       MatchStore.__emitChange();
       break;
     case MatchConstants.MATCHES_REMOVAL:
@@ -28,6 +32,8 @@ MatchStore.__onDispatch = function(payload) {
 function deleteMatch(userId) {
   delete _matchSets[userId];
   delete _matchHeroes[userId];
+  delete _matchAlliedHeroes[userId];
+  delete _matchEnemyHeroes[userId];
   delete _matchData[userId];
 }
 
@@ -42,11 +48,35 @@ function addHeroes(matches) {
   })
 }
 
-function addMatchSetsData() {
+function addAlliedHeroes(matches) {
+  _matchAlliedHeroes[matches["userId"]] = []
+  matches["matches"].forEach((match) => {
+    _matchAlliedHeroes[matches["userId"]] = _matchAlliedHeroes[matches["userId"]].concat(match["teammate"])
+  })
+}
+
+function addEnemyHeroes(matches) {
+  _matchEnemyHeroes[matches["userId"]] = []
+  matches["matches"].forEach((match) => {
+    _matchEnemyHeroes[matches["userId"]] = _matchEnemyHeroes[matches["userId"]].concat(match["enemy"])
+  })
+}
+
+function addHeroData() {
   Object.keys(_matchHeroes).forEach((user) => {
-    _matchData[user] = {};
+    _matchData[user] = {heroes: {}, allied: {}, enemy: {}};
     _matchHeroes[user].forEach((hero) => {
-      _matchData[user][hero] = _matchData[user][hero] ? _matchData[user][hero] + 1 : 1
+      _matchData[user]["heroes"][hero] = _matchData[user]["heroes"][hero] ? _matchData[user]["heroes"][hero] + 1 : 1
+    })
+  })
+  Object.keys(_matchAlliedHeroes).forEach((user) => {
+    _matchAlliedHeroes[user].forEach((hero) => {
+      _matchData[user]["allied"][hero["hero_name"]] = _matchData[user]["allied"][hero["hero_name"]] ? _matchData[user]["allied"][hero["hero_name"]] + 1 : 1
+    })
+  })
+  Object.keys(_matchEnemyHeroes).forEach((user) => {
+    _matchEnemyHeroes[user].forEach((hero) => {
+      _matchData[user]["enemy"][hero["hero_name"]] = _matchData[user]["enemy"][hero["hero_name"]] ? _matchData[user]["enemy"][hero["hero_name"]] + 1 : 1
     })
   })
 }

@@ -8,8 +8,14 @@ class RadarContainer extends React.Component {
   constructor(props) {
     super(props);
     this.colors = ['yellow', 'red', 'teal', 'lime', 'pink', 'orange', 'purple', 'blue']
-    this.state = {data: {}, matchData: {}, heroPool: []}
+    this.state = {matchData: {}, heroPool: [], tab: this.props.tab}
     this._handleMatches = this._handleMatches.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({tab: nextProps.tab}, function() {
+      this._handleMatches();
+    });
   }
 
   componentDidMount() {
@@ -28,13 +34,11 @@ class RadarContainer extends React.Component {
   }
 
   _handleMatches() {
-    this.setState({data: MatchStore.allData()})
     this.setState({matchData: MatchStore.allMatchData()})
     this.state.heroPool = [];
 
     this._handleColors(Object.keys(this.state.matchData));
 
-    let data = this.createDataSet();
     let matchData = this.createMatchDataSet();
 
     if (matchData.length === 0) {
@@ -48,8 +52,19 @@ class RadarContainer extends React.Component {
     let heroes = Object.keys(userHeroes).sort(function(obj1, obj2) {
       return userHeroes[obj2] - userHeroes[obj1]
     })
+    let mostPlayed;
+    switch (this.state.tab) {
+      case "heroes":
+        mostPlayed = heroes.slice(0, 3)
+        break;
+      case "teammate_heroes":
+        mostPlayed = heroes.slice(0, 4)
+        break;
+      case "enemy_heroes":
+        mostPlayed = heroes.slice(0, 5)
+        break;
+    }
 
-    let mostPlayed = heroes.slice(0, 3)
     mostPlayed.forEach((hero) => {
       if (this.state.heroPool.indexOf(hero) === -1) {
         this.state.heroPool.push(hero)
@@ -62,10 +77,24 @@ class RadarContainer extends React.Component {
     let matchData = this.state.matchData
     let data = []
 
-    //grab the top 10 most played heroes for each user.
-    Object.keys(matchData).forEach((user) => {
-      this.mostplayed(matchData[user]);
-    })
+    switch (this.state.tab) {
+      case "heroes":
+        //grab the most played heroes for each user.
+        Object.keys(matchData).forEach((user) => {
+          this.mostplayed(matchData[user]["heroes"]);
+        })
+        break;
+      case "teammate_heroes":
+        Object.keys(matchData).forEach((user) => {
+          this.mostplayed(matchData[user]["allied"]);
+        })
+        break;
+      case "enemy_heroes":
+        Object.keys(matchData).forEach((user) => {
+          this.mostplayed(matchData[user]["enemy"]);
+        })
+        break;
+    }
 
     //sort the heroes in alpha order
     this.state.heroPool.sort(function(obj1, obj2) {
@@ -76,30 +105,32 @@ class RadarContainer extends React.Component {
     Object.keys(matchData).forEach((user) => {
       let subData = [];
       this.state.heroPool.forEach((hero) => {
-        if (matchData[user][hero]) {
-          subData.push({axis: hero, value: matchData[user][hero]/100})
-        } else {
-          subData.push({axis: hero, value: 0})
+        switch (this.state.tab) {
+          case "heroes":
+            if (matchData[user]["heroes"][hero]) {
+              subData.push({axis: hero, value: matchData[user]["heroes"][hero]/100})
+            } else {
+              subData.push({axis: hero, value: 0})
+            }
+            break;
+          case "teammate_heroes":
+            if (matchData[user]["allied"][hero]) {
+              subData.push({axis: hero, value: matchData[user]["allied"][hero]/100})
+            } else {
+              subData.push({axis: hero, value: 0})
+            }
+            break;
+          case "enemy_heroes":
+            if (matchData[user]["enemy"][hero]) {
+              subData.push({axis: hero, value: matchData[user]["enemy"][hero]/100})
+            } else {
+              subData.push({axis: hero, value: 0})
+            }
+            break;
         }
       })
       data.push(subData)
     })
-    return data
-  }
-
-  createDataSet() {
-    let subData = [];
-    Object.keys(this.state.data).forEach((key) => {
-      subData.push({axis: key, value: this.state.data[key]/100})
-    });
-    subData.sort(function(obj1, obj2) {
-      return (obj2.value - obj1.value)
-    });
-    let mostPlayed = subData.slice(0, 10).sort(function(obj1, obj2) {
-      return (obj1.axis.localeCompare(obj2.axis))
-    });
-    let data = []
-    data.push(mostPlayed)
     return data
   }
 

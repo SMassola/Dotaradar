@@ -38,12 +38,12 @@ class Main extends React.Component {
       <div className="main-container">
         <div className="display-toggle">
           <Tabs userId={userId} handleTab={this._handleTab} />
-          <CurrentDisplay userId={userId} tab={this.state.tab}/>
+          <CurrentDisplay userId={userId} tab={this.state.tab} />
         </div>
-        <RadarContainer userId={userId} />
+        <RadarContainer userId={userId} tab={this.state.tab} />
         <div className="accounts-container">
-          <MainUser userId={userId} user={user} tab={this.state.tab}/>
-          <FriendsIndex userId={userId} user={user} tab={this.state.tab}/>
+          <MainUser userId={userId} user={user} />
+          <FriendsIndex userId={userId} user={user} />
         </div>
       </div>
     )

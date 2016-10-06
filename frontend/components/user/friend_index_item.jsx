@@ -12,13 +12,9 @@ class FriendIndexItem extends React.Component {
 
   _handleToggle() {
     if (this.state.show) {
-      MatchActions.removeMatches(this.props.friend["steamid"])
+      MatchActions.removeMatches(this.props.friend["steamid"]);
     } else {
-      switch (this.props.tab) {
-        case "heroes":
-          MatchActions.fetchMatches(this.props.friend["steamid"]);
-          break;
-      }
+      MatchActions.fetchMatches(this.props.friend["steamid"]);
     }
     this.setState({show: !this.state.show});
   }
