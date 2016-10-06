@@ -8,28 +8,18 @@ const MatchStore = new Store(AppDispatcher);
 let _matchSets = {};
 let _matchHeroes = {};
 let _matchData = {};
-let _matches = {};
-let _heroes = {};
-let _data = {};
 
 MatchStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
     case MatchConstants.MATCHES_FETCHED:
+    console.log(payload.matches);
       addMatchSets(payload.matches);
-      addMatchSetsHeroes(payload.matches);
+      addHeroes(payload.matches);
       addMatchSetsData();
-
-      resetAllMatches(payload.matches);
-      resetAllHeroes(payload.matches);
-      calculatePercentages();
       MatchStore.__emitChange();
       break;
     case MatchConstants.MATCHES_REMOVAL:
       deleteMatch(payload.userId);
-      MatchStore.__emitChange();
-      break;
-    case MatchConstants.MATCHES_REUSED:
-      readdMatches(payload.matches);
       MatchStore.__emitChange();
       break;
   }
@@ -45,7 +35,7 @@ function addMatchSets(matches) {
   _matchSets[matches["userId"]] = matches["matches"]
 }
 
-function addMatchSetsHeroes(matches) {
+function addHeroes(matches) {
   _matchHeroes[matches["userId"]] = []
   matches["matches"].forEach((match) => {
     _matchHeroes[matches["userId"]].push(match["user"]["hero_name"]);
@@ -60,46 +50,6 @@ function addMatchSetsData() {
     })
   })
 }
-
-function calculatePercentages() {
-  _data = {};
-  Object.keys(_heroes).forEach(match => {
-    _data[_heroes[match]] = _data[_heroes[match]] ? _data[_heroes[match]] + 1 : 1
-  })
-  return _data
-}
-
-function resetAllMatches(matches) {
-  _matches = {};
-  let steamMatches = matches["matches"];
-  steamMatches.forEach((match) => {
-    _matches[match["match_id"]] = match;
-  });
-}
-
-function resetAllHeroes(matches) {
-  _heroes = {};
-  let steamMatches = matches["matches"];
-  steamMatches.forEach((match) => {
-    _heroes[match["match_id"]] = match["user"]["hero_name"];
-  });
-}
-
-MatchStore.allMatches = function() {
-  return Object.keys(_matches).map(id => {
-    return _matches[id];
-  });
-};
-
-MatchStore.allHeroes = function() {
-  return Object.keys(_heroes).map(match_id => {
-    return _heroes[match_id];
-  });
-};
-
-MatchStore.allData = function() {
-  return _data
-};
 
 MatchStore.allMatchData = function() {
   return _matchData

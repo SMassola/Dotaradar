@@ -8,7 +8,7 @@ class RadarContainer extends React.Component {
   constructor(props) {
     super(props);
     this.colors = ['yellow', 'red', 'teal', 'lime', 'pink', 'orange', 'purple', 'blue']
-    this.state = {matches: [], heroes: [], data: {}, matchData: {}, heroPool: []}
+    this.state = {data: {}, matchData: {}, heroPool: []}
     this._handleMatches = this._handleMatches.bind(this)
   }
 
@@ -28,8 +28,6 @@ class RadarContainer extends React.Component {
   }
 
   _handleMatches() {
-    this.setState({matches: MatchStore.allMatches()})
-    this.setState({heroes: MatchStore.allHeroes()})
     this.setState({data: MatchStore.allData()})
     this.setState({matchData: MatchStore.allMatchData()})
     this.state.heroPool = [];

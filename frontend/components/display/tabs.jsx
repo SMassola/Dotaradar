@@ -12,13 +12,16 @@ class Tabs extends React.Component {
 
     [].forEach.call(tabs, function(el) {el.className = "tab";});
 
-    e.target.className += " selected-tab"
+    e.target.className = "tab selected-tab"
     switch(tab) {
-      case "hero":
-        this.props.handleTab("hero");
+      case "heroes":
+        this.props.handleTab("heroes");
         break;
-      case "item":
-        this.props.handleTab("item");
+      case "teammate_heroes":
+        this.props.handleTab("teammate_heroes");
+        break;
+      case "enemy_heroes":
+        this.props.handleTab("enemy_heroes");
         break;
     }
   }
@@ -27,11 +30,14 @@ class Tabs extends React.Component {
     let userId = this.props.userId
     return (
       <div className="tabs-container">
-        <div className="tab" onClick={this._handleClick.bind(null, "hero")}>
+        <div id="default-tab" className="tab" onClick={this._handleClick.bind(null, "heroes")}>
           Heroes
         </div>
-        <div className="tab" onClick={this._handleClick.bind(null, "item")}>
-          Items
+        <div className="tab" onClick={this._handleClick.bind(null, "teammate_heroes")}>
+          Allied Heroes
+        </div>
+        <div className="tab" onClick={this._handleClick.bind(null, "enemy_heroes")}>
+          Enemy Heroes
         </div>
       </div>
     )

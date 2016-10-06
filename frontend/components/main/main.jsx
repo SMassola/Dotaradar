@@ -14,6 +14,19 @@ class Main extends React.Component {
     this._handleTab = this._handleTab.bind(this);
   }
 
+  componentWillMount() {
+    this.setState({currentUser: $('#user').data('source')})
+    if (this.state.currentUser) {
+      this.setState({tab: "heroes"});
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.currentUser) {
+      document.getElementById("default-tab").className = "tab selected-tab"
+    }
+  }
+
   _handleTab(tab) {
     this.setState({tab: tab})
   }
@@ -29,8 +42,8 @@ class Main extends React.Component {
         </div>
         <RadarContainer userId={userId} />
         <div className="accounts-container">
-          <MainUser userId={userId} user={user}/>
-          <FriendsIndex userId={userId} user={user} />
+          <MainUser userId={userId} user={user} tab={this.state.tab}/>
+          <FriendsIndex userId={userId} user={user} tab={this.state.tab}/>
         </div>
       </div>
     )

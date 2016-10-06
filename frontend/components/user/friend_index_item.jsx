@@ -6,7 +6,7 @@ class FriendIndexItem extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {show: false, data: null}
+    this.state = {show: false}
     this._handleToggle = this._handleToggle.bind(this)
   }
 
@@ -14,10 +14,10 @@ class FriendIndexItem extends React.Component {
     if (this.state.show) {
       MatchActions.removeMatches(this.props.friend["steamid"])
     } else {
-      if (this.state.data) {
-        MatchActions.reuseMatches(this.state.data)
-      } else {
-        MatchActions.fetchMatches(this.props.friend["steamid"]);
+      switch (this.props.tab) {
+        case "heroes":
+          MatchActions.fetchMatches(this.props.friend["steamid"]);
+          break;
       }
     }
     this.setState({show: !this.state.show});

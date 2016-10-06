@@ -7,8 +7,12 @@ class FriendsIndex extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {friends: []}
+    this.state = {friends: [], tab: this.props.tab}
     this._handleFriends = this._handleFriends.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({tab: nextProps.tab});
   }
 
   componentDidMount() {
@@ -33,7 +37,7 @@ class FriendsIndex extends React.Component {
         <div className="friends-index">
           {this.state.friends.map((friend) => {
             return(
-              <FriendIndexItem friend={friend} key={friend["steamid"]}/>
+              <FriendIndexItem tab={this.state.tab} friend={friend} key={friend["steamid"]}/>
             );
           })}
         </div>
