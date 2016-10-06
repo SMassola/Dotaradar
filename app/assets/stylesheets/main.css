@@ -24,6 +24,11 @@
   }
 
   .accounts-container {
-    width: auto;
+    width: 25%;
+  }
+
+  .display-toggle {
+    width: 25%;
+    min-width: 25%;
   }
 }
