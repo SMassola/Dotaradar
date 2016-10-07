@@ -30,3 +30,7 @@
   height: 1px;
   width: 100%;
 }
+
+.display-description {
+  white-space: pre-wrap;
+}

@@ -41,6 +41,12 @@ class CurrentDisplay extends React.Component {
           </div>
         )
         break;
+      default:
+        return (
+          <div className="display-description">
+            Sign in with your steam account to get started.
+          </div>
+        )
     }
   }
 

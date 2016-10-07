@@ -78,6 +78,7 @@
   .user-container {
     position: absolute;
     right: 0;
+    top: 5px;
     width: auto;
   }
 
@@ -95,6 +96,6 @@
 
 
   .log-in > img {
-    height: auto;
+    height: 40px;
   }
 }

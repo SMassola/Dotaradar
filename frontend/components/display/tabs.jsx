@@ -8,26 +8,27 @@ class Tabs extends React.Component {
   }
 
   _handleClick(tab, e) {
-    let tabs = document.getElementsByClassName("tab");
+    if (this.props.userId) {
+      let tabs = document.getElementsByClassName("tab");
 
-    [].forEach.call(tabs, function(el) {el.className = "tab";});
+      [].forEach.call(tabs, function(el) {el.className = "tab";});
 
-    e.target.className = "tab selected-tab"
-    switch(tab) {
-      case "heroes":
+      e.target.className = "tab selected-tab"
+      switch(tab) {
+        case "heroes":
         this.props.handleTab("heroes");
         break;
-      case "teammate_heroes":
+        case "teammate_heroes":
         this.props.handleTab("teammate_heroes");
         break;
-      case "enemy_heroes":
+        case "enemy_heroes":
         this.props.handleTab("enemy_heroes");
         break;
+      }
     }
   }
 
   render() {
-    let userId = this.props.userId
     return (
       <div className="tabs-container">
         <div id="default-tab" className="tab" onClick={this._handleClick.bind(null, "heroes")}>
