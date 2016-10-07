@@ -7,11 +7,12 @@
 
 .friends-index {
   height: calc(100% - 32px);
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
-.friends-index:hover {
-  overflow-y: scroll;
+.friends-index::-webkit-scrollbar-track {
+  width: 0;
+  background: transparent;
 }
 
 .friends-index-title {
