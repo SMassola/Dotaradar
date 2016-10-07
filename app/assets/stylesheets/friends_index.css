@@ -7,6 +7,10 @@
 
 .friends-index {
   height: calc(100% - 32px);
+  overflow-y: hidden;
+}
+
+.friends-index:hover {
   overflow-y: scroll;
 }
 
