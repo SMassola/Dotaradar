@@ -44,6 +44,8 @@ class CurrentDisplay extends React.Component {
       default:
         return (
           <div className="display-description">
+            DotaRadar is a data visualization tool used to compare hero frequencies
+            between you and your friends. Find out your common enemies and allies.
             Sign in with your steam account to get started.
           </div>
         )
